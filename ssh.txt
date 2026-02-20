@@ -1,0 +1,2 @@
+ssh -J serveo.net root@mugassn-qwen
+password: qMGog8FSQWgtU0QV

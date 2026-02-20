@@ -1,1 +1,4 @@
 8000 http://qwen-qwen.mugassn.dpdns.org
+
+# Serveo SSH Key Fingerprint:
+# SHA256:IAWrfVLDxIPZMHJvkNLlhBpYSrpALXmvr50L4lSvNho
