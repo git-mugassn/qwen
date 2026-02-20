@@ -1,3 +1,11 @@
-# 开机时可以在这里添加自定义启动命令
-# 例如：从备份恢复数据等
+# 第一步：安装依赖和克隆仓库（快速）
+apt update && apt install -y git cmake build-essential wget
 
+# 第二步：克隆并编译 llama.cpp（中等耗时）
+cd /root && git clone https://github.com/ggerganov/llama.cpp && cd llama.cpp && cmake -B build && cmake --build build -j4
+
+# 第三步：下载模型（分段下载，避免卡住）
+cd /root/llama.cpp && mkdir -p models && cd models && wget --timeout=300 --tries=3 --continue -O qwen2.5-3b.gguf https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF/resolve/main/qwen2.5-3b-instruct-q4_k_m.gguf
+
+# 第四步：后台启动服务器
+cd /root/llama.cpp && nohup ./build/bin/llama-server -m models/qwen2.5-3b.gguf -t 4 -c 2048 --host 0.0.0.0 --port 8000 > /root/llama.log 2>&1 &
